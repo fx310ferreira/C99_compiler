@@ -1,0 +1,7 @@
+Line 6, column 5: syntax error: register
+Line 12, column 17: invalid char constant ('\128')
+Line 12, column 23: syntax error: ;
+Line 14, column 1: syntax error: }
+Line 20, column 1: unterminated char constant
+Line 22, column 5: invalid char constant ('1\'\1\'1')
+Line 25, column 11: unterminated char constant

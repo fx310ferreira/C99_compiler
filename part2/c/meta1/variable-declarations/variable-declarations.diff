@@ -1,0 +1,20 @@
+1c1,17
+< Line 2, column 1: syntax error: john
+---
+> INT
+> IDENTIFIER(a)
+> ASSIGN
+> NATURAL(1)
+> COMMA
+> IDENTIFIER(b)
+> COMMA
+> IDENTIFIER(c)
+> ASSIGN
+> NATURAL(2)
+> SEMI
+> IDENTIFIER(john)
+> VOID
+> IDENTIFIER(a)
+> LPAR
+> RPAR
+> SEMI

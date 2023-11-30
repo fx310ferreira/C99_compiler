@@ -1,0 +1,26 @@
+1c1,3
+< Line 1, column 1: syntax error: '\\'
+---
+> CHRLIT('\\')
+> NATURAL(3)
+> IDENTIFIER(o)
+2a5,6
+> NATURAL(1)
+> IDENTIFIER(o)
+7a12
+> NATURAL(123)
+8a14
+> IDENTIFIER(comp)
+9a16,17
+> MUL
+> DIV
+12a21,22
+> IDENTIFIER(__int_)
+> IDENTIFIER(_)
+13a24
+> NATURAL(999)
+15a27
+> DECIMAL(1.e9)
+16a29,30
+> NATURAL(0)
+> IDENTIFIER(z)

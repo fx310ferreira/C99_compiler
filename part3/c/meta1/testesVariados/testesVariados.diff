@@ -1,0 +1,63 @@
+1c1,3
+< Line 2, column 1: syntax error: 'a'
+---
+> CHRLIT('a')
+> CHRLIT('_')
+> CHRLIT('"')
+2a5
+> CHRLIT('\\')
+3a7
+> CHRLIT('\"')
+4a9,10
+> CHRLIT('\1')
+> CHRLIT('\12')
+9a16,17
+> CHRLIT('\n')
+> CHRLIT('?')
+11a20,43
+> CHRLIT('#')
+> CHRLIT('\123')
+> CHRLIT('z')
+> CHRLIT('Z')
+> CHRLIT('	')
+> CHRLIT(' ')
+> DECIMAL(2.)
+> DECIMAL(2.2)
+> NATURAL(2)
+> PLUS
+> IDENTIFIER(E2)
+> DECIMAL(2.2)
+> PLUS
+> IDENTIFIER(e5)
+> DECIMAL(0.0e0)
+> DECIMAL(.2)
+> MINUS
+> IDENTIFIER(e1)
+> DECIMAL(.2)
+> INT
+> IDENTIFIER(main)
+> LPAR
+> RPAR
+> LBRACE
+12a45,65
+> LT
+> LT
+> GT
+> LT
+> RESERVED(for)
+> INT
+> IDENTIFIER(a)
+> ASSIGN
+> NATURAL(5)
+> SEMI
+> IDENTIFIER(a)
+> ASSIGN
+> IDENTIFIER(a)
+> PLUS
+> NATURAL(1)
+> SEMI
+> RETURN
+> IDENTIFIER(a)
+> RESERVED(++)
+> SEMI
+> RBRACE

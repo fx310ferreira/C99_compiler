@@ -1,0 +1,20 @@
+1c1,9
+< Line 1, column 1: syntax error: '1'
+---
+> CHRLIT('1')
+> CHRLIT('a')
+> CHRLIT('\n')
+> CHRLIT('\013')
+> CHRLIT('\t')
+> CHRLIT('\\')
+> CHRLIT('\017')
+> CHRLIT('\'')
+> CHRLIT('\"')
+4a13,17
+> CHRLIT('\12')
+> CHRLIT('	')
+> CHRLIT('\0')
+> CHRLIT('\000')
+> CHRLIT('\777')
+5a19
+> CHRLIT('\\')

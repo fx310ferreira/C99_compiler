@@ -1,0 +1,58 @@
+Line 13, column 54: syntax error: break
+Line 21, column 20: syntax error: (
+Line 22, column 13: invalid char constant ('')
+Line 22, column 15: unterminated char constant
+Line 24, column 7: unterminated char constant
+Line 25, column 7: unterminated char constant
+Line 26, column 8: unterminated char constant
+Line 27, column 5: syntax error: a
+Line 27, column 7: unterminated char constant
+Line 28, column 7: invalid char constant ('')
+Line 29, column 7: invalid char constant ('ola')
+Line 29, column 12: syntax error: ;
+Line 31, column 7: invalid char constant ('')
+Line 31, column 9: invalid char constant ('')
+Line 31, column 11: invalid char constant ('')
+Line 31, column 13: invalid char constant ('')
+Line 31, column 15: invalid char constant ('')
+Line 31, column 17: invalid char constant ('')
+Line 31, column 19: invalid char constant ('')
+Line 31, column 21: invalid char constant ('')
+Line 31, column 23: invalid char constant ('')
+Line 31, column 25: syntax error: ;
+Line 32, column 7: unrecognized character (\)
+Line 33, column 7: invalid char constant ('ch')
+Line 34, column 7: invalid char constant ('20')
+Line 34, column 11: syntax error: ;
+Line 35, column 7: unterminated char constant
+Line 36, column 7: invalid char constant ('\999')
+Line 36, column 13: syntax error: ;
+Line 37, column 7: invalid char constant ('==')
+Line 37, column 11: syntax error: ;
+Line 38, column 7: invalid char constant ('\\20')
+Line 38, column 13: syntax error: ;
+Line 40, column 7: invalid char constant ('\\n')
+Line 40, column 12: syntax error: ;
+Line 43, column 7: invalid char constant ('\'\'')
+Line 43, column 13: syntax error: ;
+Line 44, column 7: invalid char constant ('\\\t\\\\')
+Line 44, column 17: syntax error: ;
+Line 45, column 7: unterminated char constant
+Line 46, column 7: unrecognized character (\)
+Line 46, column 8: invalid char constant ('\'\'\'\'')
+Line 46, column 18: unrecognized character (\)
+Line 46, column 19: invalid char constant ('')
+Line 46, column 21: invalid char constant ('\'\'\'\'\\\\')
+Line 46, column 35: syntax error: ;
+Line 46, column 37: unrecognized character (\)
+Line 46, column 38: unrecognized character (\)
+Line 52, column 5: syntax error: if
+Line 53, column 21: unterminated char constant
+Line 56, column 7: unrecognized character (.)
+Line 61, column 12: syntax error: void
+Line 62, column 131: unrecognized character (")
+Line 63, column 1: invalid char constant ('\\t')
+Line 63, column 12: invalid char constant ('ll')
+Line 63, column 19: invalid char constant (' o')
+Line 63, column 23: invalid char constant ('\\\\')
+Line 65, column 2: unterminated comment

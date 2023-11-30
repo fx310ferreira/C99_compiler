@@ -1,0 +1,43 @@
+1c1,20
+< Line 6, column 5: syntax error: register
+---
+> INT
+> RESERVED(register)
+> LPAR
+> VOID
+> RPAR
+> LBRACE
+> DOUBLE
+> IDENTIFIER(variablename)
+> ASSIGN
+> DECIMAL(123.2e-1)
+> SEMI
+> IDENTIFIER(variablename)
+> ASSIGN
+> IDENTIFIER(variablename)
+> MUL
+> NATURAL(2)
+> SEMI
+> CHAR
+> IDENTIFIER(illegal)
+> ASSIGN
+3,4c22,29
+< Line 12, column 23: syntax error: ;
+< Line 14, column 1: syntax error: }
+---
+> SEMI
+> CHAR
+> IDENTIFIER(legalescape)
+> ASSIGN
+> CHRLIT('\123')
+> SEMI
+> RBRACE
+> CHRLIT('\\')
+5a31,33
+> CHRLIT('\n')
+> CHRLIT('1')
+> NATURAL(1)
+6a35,37
+> CHRLIT('a')
+> CHRLIT('b')
+> DECIMAL(123124.e-1)

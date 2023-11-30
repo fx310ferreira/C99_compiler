@@ -1,0 +1,23 @@
+7c7,9
+< Line 8, column 1: syntax error: '	'
+---
+> CHRLIT('	')
+> CHRLIT('\n')
+> CHRLIT('\120')
+8a11,16
+> DECIMAL(1.1E12)
+> DECIMAL(1.1e12)
+> DECIMAL(1.E12)
+> DECIMAL(1.)
+> IDENTIFIER(E)
+> DECIMAL(.1e12)
+9a18
+> IDENTIFIER(e12)
+10a20,26
+> IDENTIFIER(e)
+> DECIMAL(.023)
+> IDENTIFIER(eE)
+> CHRLIT('a')
+> CHRLIT('v')
+> CHRLIT('/')
+> DIV

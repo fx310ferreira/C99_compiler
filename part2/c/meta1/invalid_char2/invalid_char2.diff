@@ -1,0 +1,42 @@
+1c1,2
+< Line 1, column 1: syntax error: o
+---
+> IDENTIFIER(o)
+> RESERVED(--)
+2a4
+> IDENTIFIER(asdasd)
+3a6
+> IDENTIFIER(asdasd)
+4a8,10
+> IDENTIFIER(asdasd)
+> CHRLIT('\\')
+> IDENTIFIER(asdasd)
+5a12
+> CHRLIT('\'')
+6a14,18
+> CHRLIT('\'')
+> IDENTIFIER(asdasd)
+> CHRLIT('\'')
+> COMMA
+> IDENTIFIER(asd)
+7a20
+> IDENTIFIER(asdas)
+13a27,28
+> IDENTIFIER(sd)
+> IDENTIFIER(asd)
+14a30
+> RESERVED(--)
+16a33
+> IDENTIFIER(sdasd)
+25a43
+> CHRLIT('\'')
+32a51
+> CHRLIT('\\')
+33a53
+> IDENTIFIER(asdaso)
+35a56
+> IDENTIFIER(asdaso)
+38a60
+> COMMA
+41a64
+> CHRLIT('\\')

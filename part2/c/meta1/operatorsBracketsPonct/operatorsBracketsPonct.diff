@@ -1,0 +1,40 @@
+1c1,29
+< Line 2, column 1: syntax error: }
+---
+> RBRACE
+> NE
+> NOT
+> ASSIGN
+> EQ
+> LT
+> GT
+> LT
+> LT
+> GT
+> GT
+> MINUS
+> GT
+> DIV
+> MUL
+> MUL
+> RESERVED(++)
+> RESERVED(--)
+> PLUS
+> MINUS
+> AND
+> AND
+> BITWISEAND
+> OR
+> BITWISEOR
+> BITWISEXOR
+> BITWISEXOR
+> BITWISEXOR
+> BITWISEXOR
+2a31,37
+> PLUS
+> MINUS
+> DIV
+> MUL
+> MUL
+> MUL
+> MOD

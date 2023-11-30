@@ -1,0 +1,12 @@
+8c8
+< Line 7, column 1: syntax error: '\\'
+---
+> CHRLIT('\\')
+9a10,12
+> CHRLIT('\'')
+> IDENTIFIER(ola)
+> IDENTIFIER(ola)
+14a18
+> IDENTIFIER(ola)
+23a28
+> CHRLIT('\\')

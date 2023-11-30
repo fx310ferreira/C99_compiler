@@ -1,0 +1,17 @@
+1c1,6
+< Line 11, column 1: syntax error: *
+---
+> MUL
+> DIV
+> IDENTIFIER(isto_esta_sem_par)
+> IDENTIFIER(no_meio_de_2)
+> IDENTIFIER(begin)
+> IDENTIFIER(end)
+2a8,12
+> IDENTIFIER(a)
+> IDENTIFIER(f)
+> DIV
+> IDENTIFIER(h)
+> DIV
+3a14
+> IDENTIFIER(n)

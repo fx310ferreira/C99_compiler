@@ -1,0 +1,41 @@
+1c1
+< Line 1, column 1: syntax error: 'f'
+---
+> CHRLIT('f')
+3a4
+> CHRLIT('\'')
+6a8
+> CHRLIT('?')
+7a10,11
+> CHRLIT('\12')
+> CHRLIT('\123')
+9a14,18
+> CHRLIT('\777')
+> CHRLIT('\000')
+> CHRLIT('\007')
+> CHRLIT('\07')
+> CHRLIT('\377')
+10a20
+> CHRLIT('\477')
+15a26
+> CHRLIT('\0')
+16a28,29
+> CHRLIT('\"')
+> CHRLIT('"')
+19a33
+> CHRLIT('\444')
+20a35
+> CHRLIT('.')
+23a39
+> CHRLIT('\n')
+24a41,43
+> CHRLIT('=')
+> CHRLIT('<')
+> IDENTIFIER(ola)
+25a45,46
+> IDENTIFIER(ola)
+> IDENTIFIER(e)
+26a48
+> IDENTIFIER(adeus)
+28a51
+> CHRLIT('	')

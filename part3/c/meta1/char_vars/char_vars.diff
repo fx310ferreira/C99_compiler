@@ -1,0 +1,16 @@
+2c2
+< Line 2, column 1: syntax error: '\\'
+---
+> CHRLIT('\\')
+5a6
+> CHRLIT('\\')
+17a19,20
+> CHRLIT('\n')
+> CHRLIT('\'')
+18a22
+> CHRLIT('\n')
+21a26
+> CHRLIT(' ')
+24a30,31
+> CHRLIT('"')
+> CHRLIT('\"')

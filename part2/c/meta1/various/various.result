@@ -1,0 +1,12 @@
+Line 12, column 37: invalid char constant ('\\\'')
+Line 12, column 43: syntax error: ,
+Line 14, column 14: unrecognized character (.)
+Line 33, column 13: syntax error: i
+Line 42, column 5: unrecognized character ($)
+Line 42, column 6: unrecognized character ($)
+Line 42, column 7: unrecognized character ($)
+Line 52, column 13: syntax error: =
+Line 55, column 11: syntax error: )
+Line 65, column 13: syntax error: break
+Line 70, column 5: syntax error: return
+Line 77, column 5: syntax error: while
