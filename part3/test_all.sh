@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # before running this script, make sure you have a makefile and the you have run the isolate_folders.sh script
-meta="meta2" # Change this to the meta folder you want to test
+meta="meta3" # Change this to the meta folder you want to test
 executable="./lexer" # Change this to your executable
 count=0
 passed=0
@@ -14,7 +14,7 @@ for file in "./c/$meta/"*; do
     rm -f $file/*.diff
     for file2 in $file/*c; do
         count=$((count+1))
-        "$executable" -t < $file2 > $file/$(basename "${file}").result
+        "$executable" -s < $file2 > $file/$(basename "${file}").result
         DIFF=$(diff $file/$(basename "${file}").result $file/$(basename "${file}").out)
         if [ "$DIFF" != "" ] 
         then

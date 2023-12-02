@@ -231,9 +231,9 @@ expr: IDENTIFIER                        { $$ = newNodeList(newNode(Identifier, $
     | NOT expr                          { $$ = newNodeList(newNode(Not, NULL, @1.first_line, @1.first_column));
                                           addChild($$->node, $2->node); }
     | LPAR exprComma RPAR                { $$ = $2; }
-    | IDENTIFIER LPAR RPAR              { $$ = newNodeList(newNode(Call, NULL, 0, 0));
+    | IDENTIFIER LPAR RPAR              { $$ = newNodeList(newNode(Call, NULL, @1.first_line, @1.first_column));
                                           addChild($$->node, newNode(Identifier, $1, @1.first_line, @1.first_column)); }
-    | IDENTIFIER LPAR exprList RPAR     { $$ = newNodeList(newNode(Call, NULL, 0, 0));
+    | IDENTIFIER LPAR exprList RPAR     { $$ = newNodeList(newNode(Call, NULL, @1.first_line, @1.first_column));
                                           addChild($$->node, newNode(Identifier, $1, @1.first_line, @1.first_column));
                                           addChildren($$->node, $3); }
     | IDENTIFIER LPAR error RPAR        { $$ = newNodeList(newNode(Error, NULL, 0, 0)); }

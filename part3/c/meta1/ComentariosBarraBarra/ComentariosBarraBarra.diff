@@ -1,7 +1,0 @@
-1c1,4
-< Line 1, column 1: syntax error: x
----
-> IDENTIFIER(x)
-> PLUS
-> IDENTIFIER(aaaa)
-> IDENTIFIER(ola)

@@ -1,7 +1,0 @@
-Line 1, column 1: syntax error: A
-Line 10, column 15: unrecognized character (:)
-Line 17, column 3: unrecognized character (#)
-Line 19, column 3: unrecognized character (@)
-Line 19, column 8: unrecognized character ($)
-Line 36, column 2: unrecognized character (?)
-Line 42, column 9: syntax error: sizeof

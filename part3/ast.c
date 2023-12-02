@@ -73,14 +73,31 @@ struct node *getchild(struct node *parent, int position) {
     return NULL;
 }
 
+// link a function to a function declaration or definition
+void link_function(struct node *parent, struct node *child) {
+    parent->function = child;
+}
+
 // print the tree in a depth-first manner
 void show(struct node *n, int level){
     // if(n->category == Error) return; //ignore error nodes
     for(int i = 0; i < level; i++) printf("..");
     if(n -> token)
-	    printf("%s(%s)\n", categories[n->category], n->token);
+	    printf("%s(%s)", categories[n->category], n->token);
     else
-	    printf("%s\n", categories[n->category]);
+	    printf("%s", categories[n->category]);
+    if (n->function){
+        printf(" - %s(", type_name(category_type(getchild(n->function, 0)->category)));
+        struct node_list *c = getchild(n->function, 2)->children;
+        while ((c = c->next) != NULL){
+            printf("%s", type_name(category_type(getchild(c->node, 0)->category)));
+            if(c->next != NULL) printf(",");
+        }
+        printf(")");
+    }else if (n->type != no_type){
+        printf(" - %s", type_name(n->type));
+    }
+    printf("\n");
     struct node_list *c = n->children;
     while ((c = c->next) != NULL)
         show(c->node, level + 1);

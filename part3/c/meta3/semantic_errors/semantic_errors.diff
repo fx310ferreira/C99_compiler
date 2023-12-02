@@ -1,0 +1,13 @@
+1a2,4
+> Line 7, column 7: Conflicting types (got double, expected short)
+> Line 8, column 5: Lvalue required
+> Line 9, column 5: Operator - cannot be applied to type void
+5a9
+> Line 19, column 9: Conflicting types (got void, expected int)
+16a21,22
+> Line 22, column 14: Operator + cannot be applied to types void, int
+> Line 22, column 7: Operator = cannot be applied to types double, undef
+133c139
+< ........Add - int
+---
+> ........Add - undef

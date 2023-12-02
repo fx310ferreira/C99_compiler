@@ -1,7 +1,7 @@
 all: yacc lex gcc clean zip
 
 run: yacc lex gcc clean
-	./lexer -s < test.in
+	./lexer -s < test.c
 
 yacc: uccompiler.y
 	yacc -d -v -t -g -Wcounterexamples --report=all uccompiler.y
