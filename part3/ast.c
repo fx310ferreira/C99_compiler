@@ -87,14 +87,17 @@ void show(struct node *n, int level){
     else
 	    printf("%s", categories[n->category]);
     if (n->function){
-        printf(" - %s(", type_name(category_type(getchild(n->function, 0)->category)));
-        struct node_list *c = getchild(n->function, 2)->children;
-        while ((c = c->next) != NULL){
-            printf("%s", type_name(category_type(getchild(c->node, 0)->category)));
-            if(c->next != NULL) printf(",");
+        printf(" - %s", type_name(category_type(getchild(n->function, 0)->category)));
+        if(getchild(n->function, 2)){
+            printf("(");
+            struct node_list *c = getchild(n->function, 2)->children;
+            while ((c = c->next) != NULL){
+                printf("%s", type_name(category_type(getchild(c->node, 0)->category)));
+                if(c->next != NULL) printf(",");
+            }
+            printf(")");
         }
-        printf(")");
-    }else if (n->type != no_type){
+     }else if (n->type != no_type && n->category != Null){
         printf(" - %s", type_name(n->type));
     }
     printf("\n");

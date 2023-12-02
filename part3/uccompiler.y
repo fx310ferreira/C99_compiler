@@ -154,17 +154,17 @@ statement: SEMI                                                         { $$ = N
          | IF LPAR exprComma RPAR statement ELSE statement               { $$ = newNodeList(newNode(If, NULL, @1.first_line, @1.first_column));
                                                                           addChildren($$->node, $3);
                                                                           if($5 != NULL) addChild($$->node, $5->node);
-                                                                          else addChild($$->node, newNode(Null, NULL, 0, 0));
+                                                                          else addChild($$->node, newNode(Null, NULL, @1.first_line, @1.first_column));
                                                                           if($7 != NULL) addChild($$->node, $7->node);
-                                                                          else addChild($$->node, newNode(Null, NULL, 0, 0)); }
+                                                                          else addChild($$->node, newNode(Null, NULL, @1.first_line, @1.first_column)); }
          | WHILE LPAR exprComma RPAR statement                           { $$ = newNodeList(newNode(While, NULL, @1.first_line, @1.first_column));
                                                                           addChildren($$->node, $3);
                                                                           if($5 != NULL) addChild($$->node, $5->node);
-                                                                          else addChild($$->node, newNode(Null, NULL, 0, 0)); }
+                                                                          else addChild($$->node, newNode(Null, NULL, @1.first_line, @1.first_column)); }
          | RETURN exprComma SEMI                                         { $$ = newNodeList(newNode(Return, NULL, @1.first_line, @1.first_column));
                                                                           addChildren($$->node, $2); }
          | RETURN SEMI                                                  { $$ = newNodeList(newNode(Return, NULL, @1.first_line, @1.first_column));
-                                                                          addChild($$->node, newNode(Null, NULL, 0, 0)); }
+                                                                          addChild($$->node, newNode(Null, NULL, @1.first_line, @1.first_column)); }
          | LBRACE error RBRACE                                          { $$ = newNodeList(newNode(Error, NULL, 0, 0)); }
          
          ;
