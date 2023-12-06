@@ -1,2 +1,3 @@
-void main(void) {}
-void main(void, void);
+char a;
+int b = !a;
+int c = !j;

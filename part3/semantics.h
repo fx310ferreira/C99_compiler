@@ -25,6 +25,7 @@ struct symbol_list *insert_symbol(struct symbol_list *symbol_table, char *identi
 struct symbol_list *search_symbol(struct symbol_list *symbol_table, char *identifier, enum symbol_type symbol_type);
 struct symbol_lists *insert_symbol_table(struct symbol_lists *table_list, char *function_name, struct node *function, struct symbol_list *symbol_table);
 struct symbol_lists *search_symbol_table(struct symbol_lists *table_list, char *function_name);
+void free_symbol_list(struct symbol_list *table_list);
 int check_parameters(struct node *parameters, struct symbol_list *scoped_table);
 int check_declaration_parameters(struct node *parameters);
 void check_function(struct node *function);

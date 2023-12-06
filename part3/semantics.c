@@ -58,15 +58,22 @@ void check_function_declaration(struct node *function) {
     struct symbol_list *scoped_table = (struct symbol_list *) malloc(sizeof(struct symbol_list));
     scoped_table->next = NULL;
     if(!symbol) {
-        if(check_parameters(parameters, NULL)){
+        struct symbol_list *temp_table = (struct symbol_list *) malloc(sizeof(struct symbol_list));
+        temp_table->next = NULL;
+        if(check_parameters(parameters, temp_table)){
             insert_symbol(symbol_table, id->token, category_type(type->category), function, func);
             insert_symbol_table(l_table_list, id->token, function, scoped_table);
         }
+        free_symbol_list(temp_table);
     } else {
-        if(!compare_params(parameters, getchild(search_symbol(symbol_table, id->token, func)->node, 2)) || type ->category != getchild(search_symbol(symbol_table, id->token, func)->node, 0)->category){
-            function_error(function, symbol->node);
+        struct symbol_list *temp_table = (struct symbol_list *) malloc(sizeof(struct symbol_list));
+        temp_table->next = NULL;
+        if(!check_parameters(parameters, temp_table)){
+            ;//NOTHING
         }
-            
+        else if(!compare_params(parameters, getchild(search_symbol(symbol_table, id->token, func)->node, 2)) || type ->category != getchild(search_symbol(symbol_table, id->token, func)->node, 0)->category)
+            function_error(function, symbol->node);
+        free_symbol_list(temp_table);
     }
 }
 
@@ -400,11 +407,6 @@ int check_parameters(struct node *parameters, struct symbol_list *scoped_table) 
     return 1;
 }
 
-// int check_declaration_parameters(struct node *parameters){
-//     printf("herre\n");
-//     return 1;
-// }/
-
 void check_declaration(struct node *declaration, struct symbol_list *scoped_table) {
     struct node *type = getchild(declaration, 0);
     struct node *id = getchild(declaration, 1);
@@ -526,6 +528,14 @@ struct symbol_list *search_symbol(struct symbol_list *table, char *identifier, e
             return symbol;
     return NULL;
 }
+
+void free_symbol_list(struct symbol_list *table){
+    struct symbol_list *aux;
+    while ((aux = table->next)){
+        free(table);
+        table = aux;
+    }
+} 
 
 void show_symbol_table() {
     struct symbol_lists *temp_table_list = l_table_list;
