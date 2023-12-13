@@ -19,9 +19,12 @@ void check_function(struct node *function) {
     local_symbol_table->next = NULL;
     struct symbol_list *symbol = search_symbol(symbol_table, id->token, func);
     if(symbol == NULL) {
+        insert_symbol(local_symbol_table, "return", category_type(type->category), newNode(Declaration, NULL, 0, 0), var);
+        if(!check_parameters(getchild(function, 2), local_symbol_table)){
+            return;
+        }
         insert_symbol(symbol_table, id->token, category_type(type->category), function, func);
         insert_symbol_table(l_table_list, id->token, function, local_symbol_table);
-        insert_symbol(local_symbol_table, "return", category_type(type->category), newNode(Declaration, NULL, 0, 0), var);
     } else if(symbol->node->category == FunctionDeclaration) {
         if(compare_params(getchild(symbol->node, 2), getchild(function, 2)) && type->category == getchild(symbol->node, 0)->category){
             symbol->node = function;
@@ -32,6 +35,9 @@ void check_function(struct node *function) {
             local_symbol_table = temp->symbol_table;
             temp->function = function;
             insert_symbol(local_symbol_table, "return", category_type(type->category), newNode(Declaration, NULL, 0, 0), var);
+            if(!check_parameters(getchild(function, 2), local_symbol_table)){
+                return;
+            }
         }
         else {
             function_error(function, symbol->node);
@@ -43,8 +49,6 @@ void check_function(struct node *function) {
         semantic_errors++;
         return; //? is this supposed to be here? remove and look at the first test
     }
-
-    check_parameters(getchild(function, 2), local_symbol_table);
     struct node_list *body = getchild(function, 3)->children;
     while((body = body->next))
         check_body(body->node, local_symbol_table); //this can be optimized
@@ -89,7 +93,7 @@ void check_body(struct node *expression, struct symbol_list *scoped_table){
         aux = getchild(expression, 0);
         check_expression(aux, scoped_table);
         if(compare_types(aux->type, integer_type) == 0){
-            printf("Line %d, column %d: Conflicting types (got %s, expected int)\n", aux->line, aux->column, type_name(aux->type));
+            conflicting_types_error(aux, integer_type, aux->line, aux->column);
             semantic_errors++;
         }
         child = child->next;
@@ -99,7 +103,7 @@ void check_body(struct node *expression, struct symbol_list *scoped_table){
     case If:
         check_expression((aux = getchild(expression, 0)), scoped_table);
         if(compare_types(aux->type, integer_type) == 0){
-            printf("Line %d, column %d: Conflicting types (got %s, expected int)\n", aux->line, aux->column, type_name(aux->type));
+            conflicting_types_error(aux, integer_type, aux->line, aux->column);
             semantic_errors++;
         }
         child = child->next;
@@ -110,7 +114,7 @@ void check_body(struct node *expression, struct symbol_list *scoped_table){
         aux = getchild(expression, 0);
         check_expression(aux, scoped_table);
         if(compatible_types(aux->type, search_symbol(scoped_table, "return", var)->type) == 0){
-            printf("Line %d, column %d: Conflicting types (got %s, expected %s)\n", aux->line, aux->column, type_name(aux->type), type_name(search_symbol(scoped_table, "return", var)->type));
+            conflicting_types_error(aux, search_symbol(scoped_table, "return", var)->type, aux->line, aux->column);
             semantic_errors++;
         }
         break;
@@ -186,16 +190,16 @@ void check_expression(struct node *expression, struct symbol_list *scoped_table)
     case Store:
         check_operation(expression, scoped_table);
         expression->type = getchild(expression, 0)->type;
-        if(getchild(expression, 1)->type == double_type && getchild(expression, 0)->type != double_type)
+        if(undef_op(getchild(expression, 0), getchild(expression, 1))){
             op_error(getchild(expression, 0), getchild(expression, 1), "=", expression->line, expression->column);
-        else if(undef_op(getchild(expression, 0), getchild(expression, 1))){
+            if(getchild(expression, 0)->type == undef_type || getchild(expression, 0)->type == no_type)
+                expression->type = undef_type;
+        }else if(getchild(expression, 1)->type == double_type && getchild(expression, 0)->type != double_type){
             op_error(getchild(expression, 0), getchild(expression, 1), "=", expression->line, expression->column);
-            // expression->type = undef_type;
         }else if(getchild(expression, 0)->category != Identifier){
             printf("Line %d, column %d: Lvalue required\n", getchild(expression, 0)->line, getchild(expression, 0)->column);
             semantic_errors++;
         }
-        expression->type = getchild(expression, 0)->type;
         break;
     case Eq:
         check_operation(expression, scoped_table);
@@ -276,11 +280,10 @@ void check_expression(struct node *expression, struct symbol_list *scoped_table)
         break;
     case Comma:
         check_operation(expression, scoped_table);
-        if(getchild(expression, 0)->type == undef_type || getchild(expression, 0)->type == no_type ){
+        if(getchild(expression, 0)->type == undef_type || getchild(expression, 0)->type == no_type || getchild(expression, 1)->type == undef_type || getchild(expression, 1)->type == no_type ){
             op_error(getchild(expression, 0), getchild(expression, 1), ",", expression->line, expression->column);
         }
         if(getchild(expression, 1)->type == undef_type || getchild(expression, 1)->type == no_type ){
-            op_error(getchild(expression, 0), getchild(expression, 1), ",", expression->line, expression->column);
             expression->type = undef_type;
         }
         break;
@@ -348,8 +351,7 @@ void check_expression(struct node *expression, struct symbol_list *scoped_table)
                     //? error?
                     parameters = parameters->next;
                     if(!compatible_types(parameters->node->type, category_type(getchild(params->node, 0)->category))){
-                        printf("Line %d, column %d: Conflicting types (got %s, expected %s)\n", parameters->node->line, parameters->node->column, 
-                            type_name(parameters->node->type), type_name(category_type(getchild(params->node, 0)->category)));
+                        conflicting_types_error(parameters->node, category_type(getchild(params->node, 0)->category), parameters->node->line, parameters->node->column);
                         semantic_errors++;
                     }
                 }
@@ -381,27 +383,38 @@ void check_operation(struct node *expression, struct symbol_list *scoped_table){
 int check_parameters(struct node *parameters, struct symbol_list *scoped_table) {
     struct node_list *child = parameters->children;
     int dirty = 0;
+    struct node *void_node = NULL;
     while((child = child->next) != NULL) {
         struct node *type = getchild(child->node, 0);
         struct node *id = getchild(child->node, 1);
-        if(type->category == Void && id){
-            invalid_void_error(type);
-            return 0;
-        }else if (type->category == Void) {
+        if (type->category == Void) {
             if(dirty == 1){
+                if(!void_node)
+                    void_node = type;
+                invalid_void_error(void_node);
+                return 0;
+            }else if(id){
                 invalid_void_error(type);
                 return 0;
             }else{
+                void_node = type;
                 dirty = 1;
             }
         }else if(!id){
+            if(void_node){
+                invalid_void_error(void_node);
+                return 0;
+            }
             dirty = 1;
-        } else if(search_symbol(scoped_table, id->token, var) == NULL) { //? the first part is probably gonna be commented
+        } else if(search_symbol(scoped_table, id->token, var) == NULL) { 
             insert_symbol(scoped_table, id->token, category_type(type->category), child->node, var);
+            if(void_node){
+                invalid_void_error(void_node);
+                return 0;
+            }
             dirty = 1;
         } else {
             already_declared_error(id);
-            return 0;
         }
     }
     return 1;
@@ -423,12 +436,8 @@ void check_declaration(struct node *declaration, struct symbol_list *scoped_tabl
         if(!aux) {
             insert_symbol(symbol_table, id->token, category_type(type->category), declaration, var);
         } else {
-            // already_declared_error(id);//? WHYYYYYYYYYYYYYYYYYYYYYYYYYY
             if(!compare_types(category_type(aux->node->children->next->node->category), category_type(type->category)))
                 printf("Line %d, column %d: Conflicting types (got %s, expected %s)\n", id->line, id->column, type_name(category_type(type->category)), type_name(category_type(aux->node->children->next->node->category)));
-            else{
-                ;//? change?
-            }
         }
     }else{
         if(search_symbol(scoped_table, id->token, var) == NULL || search_symbol(symbol_table, id->token, var) == NULL) {
@@ -442,7 +451,7 @@ void check_declaration(struct node *declaration, struct symbol_list *scoped_tabl
     if(expression->type == undef_type)
         return;
     if(!compatible_types(expression->type, category_type(type->category))){
-        printf("Line %d, column %d: Conflicting types (got %s, expected %s)\n", id->line, id->column, type_name(expression->type), type_name(category_type(type->category)));
+        conflicting_types_error(expression, category_type(type->category), id->line, id->column);
         semantic_errors++;
     }
 }
@@ -610,7 +619,7 @@ int compare_params(struct node *params1, struct node *params2){
     struct node_list *params_list1 = params1->children;
     struct node_list *params_list2 = params2->children;
 
-    while((params_list1 = params_list1->next)){
+    while((params_list1 = params_list1->next) || (params_list2->next)){
         if(!params_list1)
             return 0;
         params_list2 = params_list2->next;

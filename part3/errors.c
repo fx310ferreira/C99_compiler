@@ -25,6 +25,23 @@ void function_error(struct node *func1, struct node *func2){
     semantic_errors++;
 }
 
+void conflicting_types_error(struct node *node1, enum type type, int line, int column){
+    printf("Line %d, column %d: Conflicting types (got " , line, column);
+    if(node1->function){ 
+        printf("%s", type_name(category_type(getchild(node1->function, 0)->category)));
+        struct node_list *params = getchild(node1->function, 2)->children;
+        printf("(");
+        while((params = params->next)){
+            printf("%s", type_name(category_type(getchild(params->node, 0)->category)));
+            if(params->next != NULL) printf(",");
+        }
+        printf(")");
+    }else{
+        printf("%s", type_name(node1->type));
+    }
+    printf(", expected %s)\n", type_name(type));
+}
+
 void op_error(struct node *node1, struct node *node2, char *op, int line, int column){
     printf("Line %d, column %d: Operator %s cannot be applied to ", line, column, op);
     if(!node2)
