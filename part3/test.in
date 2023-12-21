@@ -1,3 +1,15 @@
-int a = 2.0;
-double b = 1;
-int c = d;
+void main(void) {
+	int inteiro = 1;
+	double virg = 2.0;
+	short curto = 1.0;
+	char caracter = 'a';
+    
+	undefined , inteiro;
+	undefined , virg;
+	undefined , curto;
+	undefined , caracter;
+
+	!undefined;
+	
+	return undefined;
+}

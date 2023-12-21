@@ -1,0 +1,74 @@
+yacc -d -v -t -g -Wcounterexamples --report=all uccompiler.y
+lex uccompiler.l
+gcc *.c -Wall -Wextra -o lexer 
+rm -f lex.yy.c y.tab.c y.tab.h y.output y.gv
+./lexer -s < test.in
+Line 9, column 5: Conflicting types (got int(char), expected int(int))
+===== Global Symbol Table =====
+putchar	int(int)
+getchar	int(void)
+def	int(char)
+main	int(int)
+erro	int(char)
+
+===== Function def Symbol Table =====
+return	int
+g	char	param
+
+===== Function main Symbol Table =====
+return	int
+a	int	param
+
+Program
+..FuncDefinition
+....Int
+....Identifier(def)
+....ParamList
+......ParamDeclaration
+........Char
+........Identifier(g)
+....FuncBody
+..FuncDeclaration
+....Int
+....Identifier(def)
+....ParamList
+......ParamDeclaration
+........Char
+........Identifier(g)
+..FuncDeclaration
+....Int
+....Identifier(main)
+....ParamList
+......ParamDeclaration
+........Int
+........Identifier(a)
+..FuncDefinition
+....Int
+....Identifier(main)
+....ParamList
+......ParamDeclaration
+........Char
+........Identifier(g)
+....FuncBody
+..FuncDefinition
+....Int
+....Identifier(main)
+....ParamList
+......ParamDeclaration
+........Int
+........Identifier(a)
+....FuncBody
+..FuncDeclaration
+....Int
+....Identifier(erro)
+....ParamList
+......ParamDeclaration
+........Char
+........Identifier(a)
+..FuncDeclaration
+....Int
+....Identifier(erro)
+....ParamList
+......ParamDeclaration
+........Char
+........Identifier(a)

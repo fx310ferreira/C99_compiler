@@ -1,0 +1,16 @@
+
+int helo;
+int bye = 0;
+int helo = 0;
+
+void robert1(void){}
+short robert2(void){}
+int robert3(void){}
+char robert4(void){}
+double robert5(void){}
+double robert6(int a){}
+double robert7(int){}
+double robert8(short b){}
+double robert9(char c){}
+double robert10(double c){}
+double robert11(char c, char d, char f){}

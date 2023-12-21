@@ -1,5 +1,5 @@
 
-#line 3 "lex.yy.c"
+#line 2 "lex.yy.c"
 
 #define  YY_INT_ALIGNED short int
 
@@ -617,7 +617,7 @@ char *yytext;
 #line 2 "uccompiler.l"
   #include <stdio.h>
   #include <string.h>
-
+  
   int flag = 0;
   int line = 1, column = 1;
   int line_temp = 1, column_temp = 1;
@@ -630,9 +630,9 @@ char *yytext;
       }
     return(text);
   }
-#line 634 "lex.yy.c"
+#line 633 "lex.yy.c"
 
-#line 636 "lex.yy.c"
+#line 635 "lex.yy.c"
 
 #define INITIAL 0
 #define COMMENT 1
@@ -852,7 +852,7 @@ YY_DECL
 	{
 #line 29 "uccompiler.l"
 
-#line 856 "lex.yy.c"
+#line 855 "lex.yy.c"
 
 	while ( /*CONSTCOND*/1 )		/* loops until end-of-file is reached */
 		{
@@ -1120,7 +1120,7 @@ YY_RULE_SETUP
 #line 77 "uccompiler.l"
 ECHO;
 	YY_BREAK
-#line 1124 "lex.yy.c"
+#line 1123 "lex.yy.c"
 case YY_STATE_EOF(INITIAL):
 	yyterminate();
 

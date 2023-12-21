@@ -1,0 +1,8 @@
+{
+    "files.associations": {
+        "codegen.h": "c",
+        "semantics.h": "c",
+        "ast.h": "c",
+        "system_error": "c"
+    }
+}
